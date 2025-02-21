@@ -4,21 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
-    <style>
-        .project {
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .project img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-    </style>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+<script src="{{ asset('js/app.js') }}" defer></script>
 <h1>Bienvenue sur mon portfolio</h1>
 <p>Voici la page d'accueil.</p>
 
