@@ -1,0 +1,123 @@
+@import "app.scss";
+
+body {
+    background-color: $background-color;
+    color: $primary-color;
+    overflow: auto;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+// Effect node
+#background-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.5;
+
+    @media (max-width: 1024px) {
+        display: none;
+    }
+}
+
+section {
+    position: relative;
+    z-index: 1;
+    background-color: transparent;
+}
+
+#presentation {
+    display: flex;
+    flex-direction: column;
+    height: 98vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    margin: 0;
+
+    @media (min-width: $responsive) and (orientation: landscape) {
+        flex-direction: row;
+    }
+}
+
+#information, #profile {
+    width: 100%;
+
+    @media (min-width: $responsive) and (orientation: landscape) {
+        width: 50%;
+    }
+}
+
+#information {
+    @media (min-width: $responsive) and (orientation: landscape) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+.space-letter {
+    letter-spacing: 0.4rem;
+}
+
+#header-information {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .name {
+        font-size: $h2-size;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: transparent;
+        -webkit-text-stroke: 3px white;
+        margin: 3rem 0 0;
+        text-align: center;
+    }
+
+    .about-work {
+        font-size: 0.9rem;
+        text-align: center;
+        font-weight: $bold;
+    }
+}
+
+#about-me {
+    margin: 0 $margin;
+    font-style: italic;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+
+    @media (min-width: $responsive) and (orientation: landscape) {
+        margin: 1rem $margin;
+    }
+}
+
+.pdp {
+    width: 50%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 50%;
+    border: 2px solid #00D0FF;
+    box-shadow: 0 0 50px rgba(#00D0FF, 0.32);
+
+    @media (min-width: $responsive) and (orientation: landscape) {
+        box-shadow: 0 0 50px rgba(#00D0FF, 0.32);
+    }
+}
+
+#profile {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (min-width: $responsive) and (orientation: landscape) {
+        margin-top: 0;
+    }
+}
