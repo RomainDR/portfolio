@@ -1,6 +1,7 @@
 {
-    "/resources/js/app.js": "/resources/js/app.js",
-    "/resources/js/index.js": "/resources/js/index.js",
-    "/resources/css/index.css": "/resources/css/index.css",
-    "/resources/css/app.css": "/resources/css/app.css"
+    "/js/app.js": "/js/app.js",
+    "/js/index.js": "/js/index.js",
+    "/js/node-background.js": "/js/node-background.js",
+    "/css/index.css": "/css/index.css",
+    "/css/app.css": "/css/app.css"
 }

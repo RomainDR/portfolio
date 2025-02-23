@@ -29,6 +29,7 @@ section {
     z-index: 1;
     background-color: transparent;
 }
+// Effect node
 
 #presentation {
     display: flex;
@@ -119,5 +120,27 @@ section {
 
     @media (min-width: $responsive) and (orientation: landscape) {
         margin-top: 0;
+    }
+}
+#last-project{
+    height: 98vh;
+    background-color: black;
+
+    #project-header{
+
+        font-size: $h2-size;
+        text-transform: uppercase;
+        font-weight: $bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        h1 {
+            width: 90%;
+            text-align: center;
+            margin-top: 2rem;
+            border-top: 2px solid white;
+            border-bottom: 2px solid white;
+        }
     }
 }

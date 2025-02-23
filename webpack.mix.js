@@ -17,10 +17,11 @@ mix.webpackConfig({
 
 // Compiler les assets
 mix
-    .sass('resources/scss/app.scss', 'public/resources/css')
-    .sass('resources/scss/index.scss', 'public/resources/css')
-    .js('resources/js/app.js', 'public/resources/js')
-    .js('resources/js/index.js', 'public/resources/js')
+    .sass('resources/scss/app.scss', 'public/css')
+    .sass('resources/scss/index.scss', 'public/css')
+    .js('resources/js/app.js', 'public/js')
+    .js('resources/js/index.js', 'public/js')
+    .js('resources/js/node-background.js', 'public/js')
 ;
 /*.options({
     processCssUrls: false // Désactiver le traitement des URLs dans les fichiers CSS

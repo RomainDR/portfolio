@@ -1,7 +1,7 @@
 /******/ (() => { // webpackBootstrap
-/*!*******************************!*\
-  !*** ./resources/js/index.js ***!
-  \*******************************/
+/*!*****************************************!*\
+  !*** ./resources/js/node-background.js ***!
+  \*****************************************/
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Configuration des nœuds
     var nodes = [];
     var numNodes = 50; // Nombre de nœuds
-    var maxDistance = 150; // Distance maximale pour relier les nœuds
+    var maxDistance = 200; // Distance maximale pour relier les nœuds
     var mouse = {
       x: null,
       y: null,

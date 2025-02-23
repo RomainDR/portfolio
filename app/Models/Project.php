@@ -14,6 +14,7 @@ class Project extends Model
         'title',
         'description',
         'cover_image',
+        'github_link'
     ];
 
     public function media()

@@ -21,6 +21,10 @@
         <label for="description">Description :</label>
         <textarea name="description" id="description" required></textarea>
     </div>
+    <div class="form-group">
+        <label for="github_link">GitHub Link</label>
+        <input type="url" class="form-control" id="github_link" name="github_link" placeholder="Enter GitHub link">
+    </div>
     <div>
         <label for="media">Médias (images, vidéos, GIF) :</label>
         <input type="file" name="media[]" id="media" multiple>
