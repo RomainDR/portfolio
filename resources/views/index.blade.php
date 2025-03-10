@@ -6,59 +6,113 @@
     <title>Accueil</title>
     <link href="{{ asset('css/index.css') }}" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Slick Carousel CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
 </head>
 <body>
-    <div class="content">
-        <canvas id="background-canvas"></canvas>
-        <script src="{{ asset('js/node-background.js') }}" defer></script>
+<div class="content">
+    <canvas id="background-canvas"></canvas>
+    <script src="{{ asset('js/node-background.js') }}" defer></script>
 
-        <section id="presentation">
-            <div data-aos="fade-right" data-aos-duration="500" id="information">
-                <div id="header-information">
-                    <h1 class="name space-letter">Romain DROUHOT</h1>
-                    <p class="about-work space-letter">Développeur Interface Utilisateur (UI) et Outils (Tools)</p>
-                </div>
-                <div id="about-me">
-                    <p>Je m’appelle Romain, j’ai <?php echo date("Y") - 2002 ?> ans, et je suis développeur d’interface utilisateur (UI) ainsi que créateur d’outils logiciels dans divers domaines.</p>
-                    <p>Grâce à ma formation en programmation de jeux vidéos (Gameplay Programmer) et en service informatique aux organisations, j’ai acquis une bonne maîtrise de plusieurs langages, dont le C++, Python, et C#. J’ai également enrichi mes compétences en autodidacte avec d’autres technologies.</p>
-                    <p>Ce portfolio présente les projets que j’ai pu réaliser pendant ma formation ou divers projets personnels hors formation.</p>
-                </div>
+    <section id="presentation">
+        <div data-aos="fade-right" data-aos-duration="500" id="information">
+            <div id="header-information">
+                <h1 class="name space-letter">Romain DROUHOT</h1>
+                <p class="about-work space-letter">Développeur Interface Utilisateur (UI) et Outils (Tools)</p>
             </div>
-            <div data-aos="fade-left" data-aos-duration="500" id="profile" >
-                <img src="{{ asset('resources/images/pdp.webp') }}" alt="My profile" class="pdp">
+            <div id="about-me">
+                <p>Je m’appelle Romain, j’ai <?php echo date("Y") - 2002 ?> ans, et je suis développeur d’interface
+                    utilisateur (UI) ainsi que créateur d’outils logiciels dans divers domaines.</p>
+                <p>Grâce à ma formation en programmation de jeux vidéos (Gameplay Programmer) et en service informatique
+                    aux organisations, j’ai acquis une bonne maîtrise de plusieurs langages, dont le C++, Python, et C#.
+                    J’ai également enrichi mes compétences en autodidacte avec d’autres technologies.</p>
+                <p>Ce portfolio présente les projets que j’ai pu réaliser pendant ma formation ou divers projets
+                    personnels hors formation.</p>
             </div>
-        </section>
-        <section data-aos="fade-up" data-aos-duration="1000" id="last-project">
-            <div id="project-header">
-                <h1>Mes derniers projets</h1>
+            <div class="more-information">
+                <a href="#projects" class="button">
+                    Mes projets
+                </a>
+                <a href="#contact-me" class="button">
+                    Me contacter
+                </a>
             </div>
-                <!-- Slider main container -->
-                <div class="swiper">
-                    <!-- Additional required wrapper -->
-                    <div class="swiper-wrapper">
+        </div>
+        <div data-aos="fade-left" data-aos-duration="500" id="profile">
+            <img src="{{ asset('resources/images/pdp.webp') }}" alt="My profile" class="pdp">
+        </div>
+    </section>
 
-                        @foreach($projects as $project)
-                            <div class="swiper-slide">
-                                <h2 class="title-project">{{ $project->title }}</h2>
-                                <img src="{{ Storage::url($project->cover_image) }}" alt="img">
-                                <div class="box-description">
-                                    <p>{{ $project->description }}</p>
-                                    <a href="{{ $project->github_link }}">Voir le projet</a>
-                                </div>
-                            </div>
-                        @endforeach
+    <section id="projects">
+        <div id="project-header">
+            <h1>Mes projets</h1>
+        </div>
+        <div id="projects-grid">
+            <div class="container">
+                @foreach($projects as $project)
+                    <div class="project"
+                         style="background-image: url('{{ asset('storage/' . $project->cover_image) }}');"
+                         data-project-id="{{ $project->id }}"
+                         data-title="{{ $project->title }}"
+                         data-description="{{ $project->description }}"
+                         data-media="{{ json_encode($project->media) }}"
+                         data-link="{{ $project->github_link }}">
+                        <div class="overlay"></div>
+                        <div class="content">
+                            <h2 class="title">{{ $project->title }}</h2>
+                            <p class="description">{{ $project->description }}</p>
+                        </div>
                     </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
 
-                    <div class="swiper-pagination"></div>
-
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
-
-                    <div class="swiper-scrollbar"></div>
+    <section id="contact-me">
+        <h2>Contactez-moi</h2>
+        <div class="content">
+            <div class="left-side">
+                <div class="contact-info">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:romain.drouhot@orange.fr">romain.drouhot@orange.fr</a>
                 </div>
-        </section>
+                <div class="contact-info">
+                    <i class="fas fa-phone"></i>
+                    <a href="tel:+33666617576">06.66.61.75.76</a>
+                </div>
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt"></i>
+                        Campus de Bissy,
+                        34980, Saint-Clement-De-Rivière
+                    </p>
+                </div>
+            </div>
+            <div class="right-side">
+                <iframe width="100%" height="400" id="gmap_canvas"
+                        src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=Campus%20de%20bissy%20Saint%20clement%20de%20riviere+(Location)&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Popup pour les projets -->
+<div id="project-popup" class="popup">
+    <div class="popup-content">
+        <span class="close-popup">&times;</span>
+        <div class="carousel">
+            <!-- Les images et vidéos seront injectées ici par JavaScript -->
+        </div>
+        <div class="project-description">
+            <p id="popup-description"></p>
+            <a id="github-link" href="#" target="_blank" class="github-button">Voir sur Github</a>
+        </div>
     </div>
-    <script src="{{ asset('js/index.js') }}" defer></script>
+</div>
+
+<script src="{{ asset('js/index.js') }}" defer></script>
+<!-- Slick Carousel JS -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 </body>
 </html>

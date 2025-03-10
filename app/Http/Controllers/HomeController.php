@@ -11,7 +11,7 @@ class HomeController extends Controller
     {
         $projects = Project::select('id', 'title', 'description', 'cover_image', 'github_link')
             ->orderBy('id', 'desc')
-            ->limit(3)->get();
+            ->get();
 
         return view('index', compact('projects'));
     }

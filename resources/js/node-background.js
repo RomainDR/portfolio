@@ -1,6 +1,6 @@
 ﻿document.addEventListener('DOMContentLoaded', () => {
 
-    if(window.innerWidth > 1024) {
+    if (window.innerWidth > 1024) {
         const canvas = document.getElementById('background-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -30,8 +30,8 @@
             constructor(x, y) {
                 this.x = x;
                 this.y = y;
-                this.vx = Math.random() * 2 - 1; // Vitesse horizontale aléatoire
-                this.vy = Math.random() * 2 - 1; // Vitesse verticale aléatoire
+                this.vx = Math.random() * 0.5; // Vitesse horizontale aléatoire
+                this.vy = Math.random() * 0.5; // Vitesse verticale aléatoire
                 this.word = words[Math.floor(Math.random() * words.length)]; // Mot aléatoire
             }
 

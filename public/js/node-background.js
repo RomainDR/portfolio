@@ -89,8 +89,8 @@ document.addEventListener('DOMContentLoaded', function () {
         _classCallCheck(this, Node);
         this.x = x;
         this.y = y;
-        this.vx = Math.random() * 2 - 1; // Vitesse horizontale aléatoire
-        this.vy = Math.random() * 2 - 1; // Vitesse verticale aléatoire
+        this.vx = Math.random() * 0.5; // Vitesse horizontale aléatoire
+        this.vy = Math.random() * 0.5; // Vitesse verticale aléatoire
         this.word = words[Math.floor(Math.random() * words.length)]; // Mot aléatoire
       }
 

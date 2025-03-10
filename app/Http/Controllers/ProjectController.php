@@ -43,8 +43,8 @@ class ProjectController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'cover_image' => 'nullable|image|mimes:png,jpg,jpeg,gif|max:2048', // Limite à 2 Mo
-            'media.*' => 'nullable|file|mimes:png,jpg,jpeg,gif,mp4,mkv|max:5120', // Limite à 5 Mo
+            'cover_image' => 'nullable|image|mimes:gif, webp|max:1000', // Limite à 2 Mo
+            'media.*' => 'nullable|file|mimes:webp,gif,mkv|max:1000', // Limite à 5 Mo
             'tag_id' => 'nullable|exists:tags,id',
             'new_tag' => 'nullable|string|max:255',
             'github_link' => 'nullable|url'
@@ -73,7 +73,7 @@ class ProjectController extends Controller
             foreach ($request->file('media') as $file) {
                 try {
                     $filePath = $file->store('project_media', 'public');
-                    $fileType = in_array($file->getClientOriginalExtension(), ['mp4', 'mkv']) ? 'video' : 'image';
+                    $fileType = in_array($file->getClientOriginalExtension(), ['mkv']) ? 'video' : 'image';
 
                     ProjectMedia::create([
                         'project_id' => $project->id,

@@ -4,10 +4,10 @@ $background-color: #1A232C;
 $primary-color: white;
 
 $font-policy: 'Poppins';
-$h1-size: 4rem;
-$h2-size: 3rem;
-$h3-size: 2rem;
-$h4-size: 1.5rem;
+$h1-size: 3rem;
+$h2-size: 2rem;
+$h3-size: 1.8rem;
+$h4-size: 1.2rem;
 $p-size: 1rem;
 
 $bold: 700;
@@ -16,21 +16,24 @@ $responsive: 1024px;
 
 $margin: 2rem;
 
-html{
+html {
     font-size: 16px;
     font-family: $font-policy, sans-serif;
     font-weight: 400;
 }
 
-.debug-blue{
+.debug-blue {
     background-color: blue;
 }
-.debug-red{
+
+.debug-red {
     background-color: red;
 }
-.debug-green{
+
+.debug-green {
     background-color: green;
 }
-.debug-darkgreen{
+
+.debug-darkgreen {
     background-color: darkgreen;
 }
