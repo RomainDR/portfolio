@@ -9,7 +9,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $projects = Project::select('id', 'title', 'description', 'cover_image', 'github_link')
+        $projects = Project::with('media') // Charge les médias associés
+        ->select('id', 'title', 'description', 'cover_image', 'github_link')
             ->orderBy('id', 'desc')
             ->get();
 

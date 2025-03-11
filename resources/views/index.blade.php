@@ -7,9 +7,6 @@
     <link href="{{ asset('css/index.css') }}" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- Slick Carousel CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
 </head>
 <body>
 <div class="content">
@@ -54,10 +51,6 @@
                 @foreach($projects as $project)
                     <div class="project"
                          style="background-image: url('{{ asset('storage/' . $project->cover_image) }}');"
-                         data-project-id="{{ $project->id }}"
-                         data-title="{{ $project->title }}"
-                         data-description="{{ $project->description }}"
-                         data-media="{{ json_encode($project->media) }}"
                          data-link="{{ $project->github_link }}">
                         <div class="overlay"></div>
                         <div class="content">
@@ -97,22 +90,6 @@
     </section>
 </div>
 
-<!-- Popup pour les projets -->
-<div id="project-popup" class="popup">
-    <div class="popup-content">
-        <span class="close-popup">&times;</span>
-        <div class="carousel">
-            <!-- Les images et vidéos seront injectées ici par JavaScript -->
-        </div>
-        <div class="project-description">
-            <p id="popup-description"></p>
-            <a id="github-link" href="#" target="_blank" class="github-button">Voir sur Github</a>
-        </div>
-    </div>
-</div>
-
 <script src="{{ asset('js/index.js') }}" defer></script>
-<!-- Slick Carousel JS -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 </body>
 </html>

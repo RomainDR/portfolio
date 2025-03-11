@@ -4,9 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter un projet</title>
+    <style>
+        .alert-danger { color: red; }
+    </style>
 </head>
 <body>
 <h1>Ajouter un projet</h1>
+
+<!-- Affichage des erreurs de validation -->
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <form action="{{ route('add-project.submit') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div>
@@ -21,9 +36,9 @@
         <label for="description">Description :</label>
         <textarea name="description" id="description" required></textarea>
     </div>
-    <div class="form-group">
-        <label for="github_link">GitHub Link</label>
-        <input type="url" class="form-control" id="github_link" name="github_link" placeholder="Enter GitHub link">
+    <div>
+        <label for="github_link">Lien GitHub :</label>
+        <input type="url" name="github_link" id="github_link" placeholder="Entrez le lien GitHub">
     </div>
     <div>
         <label for="media">Médias (images, vidéos, GIF) :</label>
