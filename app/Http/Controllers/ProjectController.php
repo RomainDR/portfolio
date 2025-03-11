@@ -52,8 +52,8 @@ class ProjectController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'cover_image' => 'nullable|image|mimes:gif,webp|max:1000', // Limite à 1 Mo
-            'media.*' => 'nullable|file|mimes:webp,gif,mkv|max:1000', // Limite à 1 Mo
+            'cover_image' => 'nullable|image|mimes:gif,webp|max:5000',
+            'media.*' => 'nullable|file|mimes:webp,gif,mkv|max:5000',
             'tag_id' => 'nullable|exists:tags,id',
             'new_tag' => 'nullable|string|max:255',
             'github_link' => 'nullable|url'
@@ -107,5 +107,106 @@ class ProjectController extends Controller
 
         // Rediriger vers la page d'accueil avec un message de succès
         return redirect()->route('home')->with('success', 'Projet ajouté avec succès !');
+    }
+    // Afficher la liste des projets
+    public function index()
+    {
+        $projects = Project::with('tags', 'media')->get();
+        return view('projects.index', compact('projects'));
+    }
+
+    // Afficher le formulaire d'édition d'un projet
+    public function edit($id)
+    {
+        $project = Project::with('tags', 'media')->findOrFail($id);
+        $tags = Tag::all();
+        return view('projects.edit', compact('project', 'tags'));
+    }
+
+    // Mettre à jour un projet
+    public function update(Request $request, $id)
+    {
+        $project = Project::findOrFail($id);
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'cover_image' => 'nullable|image|mimes:gif,webp|max:5000',
+            'media.*' => 'nullable|file|mimes:webp,gif,mkv|max:5000',
+            'tag_id' => 'nullable|exists:tags,id',
+            'new_tag' => 'nullable|string|max:255',
+            'github_link' => 'required|url'
+        ]);
+
+        // Mettre à jour l'image de couverture
+        if ($request->hasFile('cover_image')) {
+            // Supprimer l'ancienne image si elle existe
+            if ($project->cover_image && Storage::disk('public')->exists($project->cover_image)) {
+                Storage::disk('public')->delete($project->cover_image);
+            }
+            // Enregistrer la nouvelle image
+            $coverImagePath = $request->file('cover_image')->store('project_covers', 'public');
+            $project->cover_image = $coverImagePath;
+        }
+
+        // Mettre à jour les médias
+        if ($request->hasFile('media')) {
+            // Supprimer les anciens médias
+            foreach ($project->media as $media) {
+                if (Storage::disk('public')->exists($media->file_path)) {
+                    Storage::disk('public')->delete($media->file_path);
+                }
+                $media->delete();
+            }
+            // Ajouter les nouveaux médias
+            foreach ($request->file('media') as $file) {
+                $filePath = $file->store('project_media', 'public');
+                $fileType = in_array($file->getClientOriginalExtension(), ['mkv']) ? 'video' : 'image';
+                ProjectMedia::create([
+                    'project_id' => $project->id,
+                    'file_path' => $filePath,
+                    'file_type' => $fileType,
+                ]);
+            }
+        }
+
+        // Mettre à jour les tags
+        if ($request->filled('new_tag')) {
+            $tag = Tag::create(['name' => $request->new_tag]);
+            $project->tags()->sync([$tag->id]);
+        } elseif ($request->filled('tag_id')) {
+            $project->tags()->sync([$request->tag_id]);
+        } else {
+            $project->tags()->detach();
+        }
+
+        // Mettre à jour les autres champs
+        $project->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'github_link' => $request->github_link,
+        ]);
+
+        return redirect()->route('projects.index')->with('success', 'Projet mis à jour avec succès !');
+    }
+
+    // Supprimer un projet
+    public function destroy($id)
+    {
+        $project = Project::findOrFail($id);
+
+        // Supprimer l'image de couverture
+        Storage::disk('public')->delete($project->cover_image);
+
+        // Supprimer les médias
+        foreach ($project->media as $media) {
+            Storage::disk('public')->delete($media->file_path);
+            $media->delete();
+        }
+
+        // Supprimer le projet
+        $project->delete();
+
+        return redirect()->route('projects.index')->with('success', 'Projet supprimé avec succès !');
     }
 }
